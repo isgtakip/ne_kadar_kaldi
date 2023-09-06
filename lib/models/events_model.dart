@@ -29,20 +29,20 @@ class EventsModel {
         eventEndDate: "2024-05-01 00:00:00",
         boxIsSelected: false));
     events.add(EventsModel(
-        eventName: "KURBAN BAYRAMI",
+        eventName: "Kurban Bayramı",
         backgroundImage: "assets/images/kurban.jpg",
-        eventEndDate: "2050-23-15 00:00:00",
+        eventEndDate: "2024-23-15 00:00:00",
         boxIsSelected: false));
     events.add(EventsModel(
-        eventName: "29 EKİM CUMHURİYET BAYRAMI",
+        eventName: "29 Ekim Cumhuriyet Bayramı",
         backgroundImage: "assets/images/29_ekim.jpg",
         eventEndDate: "2024-04-15 00:00:00",
         boxIsSelected: false));
 
     events.add(EventsModel(
-        eventName: "YENİ YIL",
+        eventName: "Yeni Yıl",
         backgroundImage: "assets/images/crismas.jpg",
-        eventEndDate: "2050-23-15 00:00:00",
+        eventEndDate: "2024-23-15 00:00:00",
         boxIsSelected: false));
 
     return events;

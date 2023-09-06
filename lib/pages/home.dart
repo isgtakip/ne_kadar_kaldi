@@ -27,80 +27,104 @@ class _HomePageState extends State<HomePage> {
         children: [
           _searchField(),
           const SizedBox(
-            height: 40,
+            height: 20,
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ListView.separated(
-                itemCount: events.length,
-                shrinkWrap: true,
-                separatorBuilder: (context, index) => const SizedBox(
-                  height: 15,
-                ),
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                itemBuilder: (context, index) {
-                  return Container(
-                    height: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      image: DecorationImage(
-                        image: AssetImage(events[index].backgroundImage),
-                        fit: BoxFit.cover,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: const Color(0xff1D1617).withOpacity(0.07),
-                          offset: const Offset(0, 7),
-                          blurRadius: 40,
-                          spreadRadius: 0,
-                        )
-                      ],
-                    ),
-                    child: Stack(
-                      children: [
-                        Row(
+          _eventList(),
+          const SizedBox(
+            height: 40,
+          )
+        ],
+      ),
+    );
+  }
+
+  Column _eventList() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ListView.separated(
+          itemCount: events.length,
+          shrinkWrap: true,
+          physics: const ClampingScrollPhysics(),
+          separatorBuilder: (context, index) => const SizedBox(
+            height: 15,
+          ),
+          padding: const EdgeInsets.only(left: 20, right: 20),
+          itemBuilder: (context, index) {
+            return Container(
+              height: 200,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(16),
+                /*
+                image: DecorationImage(
+                  image: AssetImage(events[index].backgroundImage),
+                  fit: BoxFit.cover,
+                ),*/
+                boxShadow: [
+                  BoxShadow(
+                    color: const Color(0xff1D1617).withOpacity(0.07),
+                    offset: const Offset(0, 7),
+                    blurRadius: 40,
+                    spreadRadius: 0,
+                  )
+                ],
+              ),
+              child: Stack(
+                children: [
+                  Container(
+                      height: 150,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(16),
+                        image: DecorationImage(
+                          image: AssetImage(events[index].backgroundImage),
+                          fit: BoxFit.cover,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: const Color(0xff1D1617).withOpacity(0.07),
+                            offset: const Offset(0, 7),
+                            blurRadius: 40,
+                            spreadRadius: 0,
+                          )
+                        ],
+                      )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Flexible(
+                        child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Flexible(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                            Padding(
+                              padding: const EdgeInsets.only(
+                                  left: 15, top: 15, bottom: 15, right: 15),
+                              child: Stack(
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 15,
-                                        top: 15,
-                                        bottom: 15,
-                                        right: 15),
-                                    child: Stack(
-                                      children: [
-                                        Text(
-                                          events[index].eventName,
-                                          softWrap: true,
-                                          style: TextStyle(
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w900,
-                                              foreground: Paint()
-                                                ..style = PaintingStyle.stroke
-                                                ..color = Colors.black87
-                                                ..strokeWidth = 1),
-                                        ),
-                                        Text(
-                                          events[index].eventName,
-                                          softWrap: true,
-                                          style: const TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w900,
-                                            color: Colors.white,
-                                            shadows: [
-                                              Shadow(
-                                                color: Colors.black87,
-                                                offset: Offset(0, 0),
-                                                blurRadius: 5,
-                                              ),
-                                            ],
-                                          ),
+                                  Text(
+                                    events[index].eventName,
+                                    softWrap: true,
+                                    style: TextStyle(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w900,
+                                        foreground: Paint()
+                                          ..style = PaintingStyle.stroke
+                                          ..color = Colors.black87
+                                          ..strokeWidth = 1),
+                                  ),
+                                  Text(
+                                    events[index].eventName,
+                                    softWrap: true,
+                                    style: const TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w900,
+                                      color: Colors.white,
+                                      shadows: [
+                                        Shadow(
+                                          color: Colors.black87,
+                                          offset: Offset(0, 0),
+                                          blurRadius: 5,
                                         ),
                                       ],
                                     ),
@@ -110,83 +134,61 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 15, left: 15, right: 15, bottom: 15),
-                              child: Stack(children: [
-                                CountDownText(
-                                  due: DateTime.parse(
-                                      events[index].eventEndDate),
-                                  finishedText: "Done",
-                                  showLabel: false,
-                                  longDateName: true,
-                                  daysTextLong: " GÜN ",
-                                  hoursTextLong: " SAAT ",
-                                  minutesTextLong: " DAKİKA ",
-                                  secondsTextLong: " SANİYE ",
-                                  style: TextStyle(
-                                      fontSize: 34,
-                                      fontWeight: FontWeight.w600,
-                                      foreground: Paint()
-                                        ..style = PaintingStyle.stroke
-                                        ..color = Colors.black87
-                                        ..strokeWidth = 1),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            top: 15, left: 15, right: 15, bottom: 10),
+                        child: Stack(children: [
+                          CountDownText(
+                            due: DateTime.parse(events[index].eventEndDate),
+                            finishedText: "Done",
+                            showLabel: false,
+                            longDateName: true,
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                foreground: Paint()
+                                  ..style = PaintingStyle.stroke
+                                  ..color = Colors.black87
+                                  ..strokeWidth = 1),
+                          ),
+                          CountDownText(
+                            due: DateTime.parse(events[index].eventEndDate),
+                            finishedText: "Done",
+                            showLabel: false,
+                            longDateName: false,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                              shadows: [
+                                Shadow(
+                                  color: Colors.black87,
+                                  offset: Offset(0, 0),
+                                  blurRadius: 5,
                                 ),
-                                CountDownText(
-                                  due: DateTime.parse(
-                                      events[index].eventEndDate),
-                                  finishedText: "Done",
-                                  showLabel: false,
-                                  longDateName: true,
-                                  daysTextLong: " GÜN ",
-                                  hoursTextLong: " SAAT ",
-                                  minutesTextLong: " DAKİKA ",
-                                  secondsTextLong: " SANİYE ",
-                                  style: const TextStyle(
-                                    fontSize: 34,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                    shadows: [
-                                      Shadow(
-                                        color: Colors.black87,
-                                        offset: Offset(0, 0),
-                                        blurRadius: 5,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ]),
+                              ],
                             ),
-                          ],
-                        ),
-                        const Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.all(15),
-                              child: LinearProgressIndicator(
-                                value: 0.7,
-                                color: Colors.greenAccent, //<-- SEE HERE
-                                backgroundColor: Colors.grey,
-                              ),
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  );
-                },
-              )
-            ],
-          ),
-          const SizedBox(
-            height: 40,
-          )
-        ],
-      ),
+                          ),
+                        ]),
+                      ),
+                    ],
+                  ),
+                  const Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [],
+                  )
+                ],
+              ),
+            );
+          },
+        )
+      ],
     );
   }
 
@@ -235,7 +237,7 @@ class _HomePageState extends State<HomePage> {
   AppBar appBar() {
     return AppBar(
       title: const Text(
-        'Yaklaşan Etkinlikler',
+        'Kaç Gün Kaldı',
         style: TextStyle(
             color: Colors.black, fontSize: 18, fontWeight: FontWeight.bold),
       ),
